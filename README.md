@@ -4,6 +4,8 @@
 ![FastAPI](https://badgen.net/badge/framework/FastAPI/teal)
 ![Status](https://badgen.net/badge/status/active/green)
 
+![SQLite Viewer Screenshot](assets/example.png)
+
 A lightweight, local web application to visually explore SQLite databases. Built with FastAPI for the backend and Vanilla HTML/JS/CSS for the frontend.
 
 ## Features
