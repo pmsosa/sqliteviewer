@@ -4,6 +4,39 @@ let currentPage = 1;
 const limit = 100;
 let totalRows = 0;
 
+// Theme Initialization
+const themeToggleBtn = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+
+function setTheme(isDark) {
+    if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Check local storage or system preference
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    setTheme(true);
+} else {
+    setTheme(false);
+}
+
+themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.hasAttribute('data-theme');
+    setTheme(!isDark);
+});
+
 // Tab Switching
 function showTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
