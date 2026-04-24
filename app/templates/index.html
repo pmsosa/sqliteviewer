@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQLite Viewer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>SQLite Viewer</h2>
+            
+            <div class="connection-section">
+                <h3>Load Database</h3>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('upload-tab')">Upload</button>
+                    <button class="tab-btn" onclick="showTab('local-tab')">Local Path</button>
+                </div>
+                
+                <div id="upload-tab" class="tab-content active">
+                    <form id="upload-form">
+                        <input type="file" id="db-file" accept=".db,.sqlite,.sqlite3" required>
+                        <button type="submit" class="btn primary-btn">Upload DB</button>
+                    </form>
+                </div>
+                
+                <div id="local-tab" class="tab-content">
+                    <form id="local-form">
+                        <input type="text" id="local-path" placeholder="/absolute/path/to/db.sqlite" required>
+                        <button type="submit" class="btn primary-btn">Connect</button>
+                    </form>
+                </div>
+                
+                <div id="connection-status" class="status-msg"></div>
+            </div>
+
+            <div class="tables-section" style="display: none;">
+                <h3>Tables <span id="db-name" class="badge"></span></h3>
+                <ul id="tables-list"></ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header" style="display: none;">
+                <h2 id="current-table-name">Select a table</h2>
+                <div class="query-box">
+                    <form id="query-form">
+                        <textarea id="sql-query" placeholder="Enter custom SELECT query..."></textarea>
+                        <button type="submit" class="btn secondary-btn">Run Query</button>
+                    </form>
+                </div>
+            </header>
+            
+            <div class="table-container" id="data-container" style="display: none;">
+                <div class="table-controls">
+                    <span id="row-count-info"></span>
+                    <div class="pagination">
+                        <button id="prev-page" class="btn pagination-btn" disabled>Previous</button>
+                        <span id="page-info">Page 1</span>
+                        <button id="next-page" class="btn pagination-btn" disabled>Next</button>
+                    </div>
+                </div>
+                <div class="scroll-wrapper">
+                    <table id="data-table">
+                        <thead>
+                            <tr id="table-head"></tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="error-msg" class="error-msg"></div>
+            </div>
+            
+            <div id="welcome-msg" class="welcome-screen">
+                <h2>Welcome to SQLite Viewer</h2>
+                <p>Upload a database or provide a local path to begin exploring.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
